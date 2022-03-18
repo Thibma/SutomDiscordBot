@@ -144,7 +144,7 @@ async def top(ctx):
     i = 0
     for user in result:
         i += 1
-        description += "**" + str(i) + ". " + user["userName"] + "** " + str(user["score"]) + " points"
+        description += "**" + str(i) + ". " + user["userName"] + "** " + str(user["score"]) + " points\n"
 
     embed = Embed(
         title = "Top 10 du serveur",
