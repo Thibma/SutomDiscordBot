@@ -131,6 +131,11 @@ async def score(ctx):
 async def top(ctx):
     db = mongodb.sutom.users
     result = db.find(sort = [( 'score', pymongo.DESCENDING )], limit = 10)
+
+    if result is None:
+        await ctx.send("Aucun joueur enregistré")
+        return
+
     first = result[0]
 
     description = ""
