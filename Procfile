@@ -1,1 +1,1 @@
-worker: python sutom.py
+worker: python3 sutom.py
