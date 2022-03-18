@@ -167,7 +167,7 @@ def checkTime():
     threading.Timer(1, checkTime).start()
     now = pytz.utc.localize(datetime.datetime.now()).astimezone(timezone).strftime("%H:%M:%S")
 
-    if(now == '12:44:40'):  # check if matches with the desired time
+    if(now == '00:00:00'):  # check if matches with the desired time
         print("send daily message")
         channel = bot.get_channel(550295344337125377)
         bot.loop.create_task(channel.send(
