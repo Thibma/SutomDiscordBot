@@ -174,7 +174,7 @@ def checkTime():
 
     if(now == '00:00:00'):  # check if matches with the desired time
         print("send daily message")
-        channel = bot.get_channel(550295344337125377)
+        channel = bot.get_channel(953643248939860048)
         bot.loop.create_task(channel.send(
             "**Sutom du jour disponible ! Bonne chance !**\n\n" +
             "https://sutom.nocle.fr"
