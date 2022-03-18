@@ -2,6 +2,7 @@ from email.message import Message
 from time import time
 from discord import Embed
 from discord import Color
+from discord import Game
 from discord.ext import commands
 import datetime
 import pymongo
@@ -17,6 +18,7 @@ bot = commands.Bot(command_prefix = '$')
 @bot.event
 async def on_ready():
     print("Bot ready")
+    await bot.change_presence(activity = Game(name = "Sutom - $aide"))
     checkTime()
 
 @bot.event
