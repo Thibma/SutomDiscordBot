@@ -82,7 +82,7 @@ async def on_message(message: Message):
             result = db.update_one({"userId": message.author.id}, {"$set": {
                 "score": newScore,
                 "completed": newCompleted,
-                "lastUpdate": now()
+                "lastUpdate": now
             }})
 
         switcher = {
