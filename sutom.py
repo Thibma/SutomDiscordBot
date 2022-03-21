@@ -25,7 +25,8 @@ async def on_ready():
 async def on_message(message: Message):
     await bot.process_commands(message)
     if message.content.startswith("SUTOM #"):
-        delta = datetime.datetime.now().date() - createDate.date()
+        now = pytz.utc.localize(datetime.datetime.now()).astimezone(timezone)
+        delta = now.date() - createDate.date()
         if not str(delta.days) in message.content:
             await message.add_reaction("❌")
             return
@@ -44,7 +45,7 @@ async def on_message(message: Message):
         verify = db.find_one({"userId": message.author.id}, sort=[( '_id', pymongo.DESCENDING )])
         if verify is not None:
             date = datetime.datetime.date(verify["date"])
-            if date == datetime.datetime.now().date():
+            if date == now.date():
                 print("même jour !")
                 await message.add_reaction("❌")
                 return
@@ -54,7 +55,7 @@ async def on_message(message: Message):
             "userName": message.author.name,
             "score": score,
             "schematic": sutomCode,
-            "date": datetime.datetime.now()
+            "date": now
         }
         db = mongodb.sutom.score
         result = db.insert_one(send)
@@ -69,8 +70,8 @@ async def on_message(message: Message):
                 "userName": message.author.name,
                 "score": score,
                 "completed": 1,
-                "created": datetime.datetime.now(),
-                "lastUpdate": datetime.datetime.now()
+                "created": now,
+                "lastUpdate": now
             }
             result = db.insert_one(send)
         else:
@@ -81,7 +82,7 @@ async def on_message(message: Message):
             result = db.update_one({"userId": message.author.id}, {"$set": {
                 "score": newScore,
                 "completed": newCompleted,
-                "lastUpdate": datetime.datetime.now()
+                "lastUpdate": now()
             }})
 
         switcher = {
