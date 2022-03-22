@@ -25,7 +25,8 @@ async def on_ready():
 async def on_message(message: Message):
     await bot.process_commands(message)
     if message.content.startswith("SUTOM #"):
-        now = pytz.utc.localize(datetime.datetime.now()).astimezone(timezone)
+        now = pytz.utc.localize(datetime.datetime.now()).replace(tzinfo = pytz.utc).astimezone(timezone)
+        print(now)
         delta = now.date() - createDate.date()
         if not str(delta.days) in message.content:
             await message.add_reaction("❌")
