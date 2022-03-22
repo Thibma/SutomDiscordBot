@@ -27,7 +27,7 @@ async def on_message(message: Message):
     await bot.process_commands(message)
     if message.content.startswith("SUTOM #"):
         #now = pytz.utc.localize(datetime.datetime.utcnow()).astimezone(timezone)
-        now = datetime.date.now(tz = timezone)
+        now = datetime.datetime.now(tz = timezone)
         print(now)
         delta = now.date() - createDate.date()
         if not str(delta.days) in message.content:
