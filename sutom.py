@@ -12,6 +12,7 @@ import pytz
 mongodb = pymongo.MongoClient("mongodb+srv://thibma:H7OlIvnedl4gdKOA@cluster0.1mnou.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", tz_aware = True)
 createDate = datetime.datetime(2022, 1, 7)
 timezone = pytz.timezone("Europe/Paris")
+print(datetime.datetime.now(tz = timezone))
 
 bot = commands.Bot(command_prefix = '$')
 
@@ -25,7 +26,8 @@ async def on_ready():
 async def on_message(message: Message):
     await bot.process_commands(message)
     if message.content.startswith("SUTOM #"):
-        now = pytz.utc.localize(datetime.datetime.utcnow()).astimezone(timezone)
+        #now = pytz.utc.localize(datetime.datetime.utcnow()).astimezone(timezone)
+        now = datetime.date.now(tz = timezone)
         print(now)
         delta = now.date() - createDate.date()
         if not str(delta.days) in message.content:
