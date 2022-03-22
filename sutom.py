@@ -9,7 +9,7 @@ import pymongo
 import threading
 import pytz
 
-mongodb = pymongo.MongoClient("mongodb+srv://thibma:H7OlIvnedl4gdKOA@cluster0.1mnou.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+mongodb = pymongo.MongoClient("mongodb+srv://thibma:H7OlIvnedl4gdKOA@cluster0.1mnou.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", tz_aware = True)
 createDate = datetime.datetime(2022, 1, 7)
 timezone = pytz.timezone("Europe/Paris")
 
