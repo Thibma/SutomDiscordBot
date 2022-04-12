@@ -4,12 +4,16 @@ from discord import Embed
 from discord import Color
 from discord import Game
 from discord.ext import commands
+from dotenv import load_dotenv
 import datetime
 import pymongo
 import threading
 import pytz
+import os
 
-mongodb = pymongo.MongoClient("mongodb+srv://thibma:H7OlIvnedl4gdKOA@cluster0.1mnou.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", tz_aware = True)
+load_dotenv()
+
+mongodb = pymongo.MongoClient(os.getenv("MONGO_URL"), tz_aware = True)
 createDate = datetime.datetime(2022, 1, 7)
 timezone = pytz.timezone("Europe/Paris")
 print(datetime.datetime.now(tz = timezone))
@@ -236,4 +240,4 @@ def scoreSutom(sutomCode):
         score -= 1
     return 0
 
-bot.run("OTUzOTQyNDI3NjkyMDQ0MzI5.YjL6Hg.OrXn9uIjXKdJyKlECA90jKJJfDE")
+bot.run(os.getenv("TOKEN_BOT"))
