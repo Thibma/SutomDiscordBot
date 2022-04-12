@@ -47,7 +47,7 @@ async def on_message(message: Message):
 
         print("score : ", score)
 
-        db = mongodb.sutom.score
+        db = mongodb[str(message.guild.id)].score
         verify = db.find_one({"userId": message.author.id}, sort=[( '_id', pymongo.DESCENDING )])
         if verify is not None:
             date = datetime.datetime.date(verify["date"])
@@ -63,10 +63,10 @@ async def on_message(message: Message):
             "schematic": sutomCode,
             "date": now
         }
-        db = mongodb.sutom.score
+        db = mongodb[str(message.guild.id)].score
         result = db.insert_one(send)
 
-        db = mongodb.sutom.users
+        db = mongodb[str(message.guild.id)].users
 
         result = db.find_one({"userId": message.author.id})
 
@@ -107,7 +107,7 @@ async def on_message(message: Message):
 
 @bot.command()
 async def score(ctx):
-    db = mongodb.sutom.users
+    db = mongodb[str(ctx.message.guild.id)].users
     result = db.find_one({"userId": ctx.author.id})
     if result is None:
         await ctx.send("Aucun score enregistré.")
@@ -138,7 +138,7 @@ async def score(ctx):
 
 @bot.command()
 async def top(ctx):
-    db = mongodb.sutom.users
+    db = mongodb[str(ctx.message.guild.id)].users
     result = db.find(sort = [( 'score', pymongo.DESCENDING )], limit = 10)
 
     if result is None:
