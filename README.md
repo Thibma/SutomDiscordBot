@@ -67,5 +67,6 @@ Allez dans 'Deploy' ensuite et suivez les insctructions pour uploadez le Bot sur
 ## Commandes
 * `$score` : Affiche le score du joueur
 * `$top`: Affiche le Top 10 du serveur
+* `$daily`: (ADMIN ONLY) Affiche le message quotidien de disponibilité du Sutom du jour sur ce channel
 * `$help` : Affiche l'aide du bot
 

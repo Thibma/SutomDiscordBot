@@ -1,3 +1,4 @@
+from cmath import e
 from email.message import Message
 from time import time
 from discord import Embed
@@ -18,7 +19,6 @@ load_dotenv()
 mongodb = pymongo.MongoClient(os.getenv("MONGO_URL"), tz_aware = True)
 createDate = datetime.datetime(2022, 1, 7)
 timezone = pytz.timezone("Europe/Paris")
-print(datetime.datetime.now(tz = timezone))
 
 bot = commands.Bot(command_prefix = '$', help_command=None)
 
@@ -167,6 +167,30 @@ async def top(ctx):
     await ctx.send(embed = embed)
 
 @bot.command()
+async def daily(ctx):
+    if ctx.message.author.guild_permissions.administrator:
+        db = mongodb[str(ctx.message.guild.id)].options
+        options = db.find_one({ "discord_id": ctx.message.guild.id })
+        if options is None:
+            send = {
+                "discord_id": ctx.message.guild.id,
+                "daily_channel": ctx.message.channel.id
+            }
+            result = db.insert_one(send)
+        else:
+            result = db.update_one({ "discord_id": ctx.message.guild.id }, {"$set": {
+                "daily_channel": ctx.message.channel.id
+            }} )
+        await ctx.send(
+            "Le message du jour sera envoyé sur ce channel Discord."
+        )
+    else:
+        await ctx.send(
+            "Vous n'avez pas la permission d'effectuer cette commande."
+        )
+
+
+@bot.command()
 async def help(ctx):
     await ctx.send(
         "Bienvenue sur le **Bot Sutom**. \n" +
@@ -175,6 +199,7 @@ async def help(ctx):
         "Commandes disponibles :\n" +
         "**$score** - Affiche votre score global\n" +
         "**$top** - Affiche le top score du serveur\n" +
+        "**$daily** - (ADMIN ONLY) Affiche le message quotidien de disponibilité du Sutom du jour sur ce channel" +
         "**$help** - Affiche cette aide LUL\n\n" +
         "Bot développé par **Thibma**"
     )
@@ -183,14 +208,19 @@ async def help(ctx):
 def checkTime():
     threading.Timer(1, checkTime).start()
     now = pytz.utc.localize(datetime.datetime.now()).astimezone(timezone).strftime("%H:%M:%S")
-
-    if(now == '00:00:00'):  # check if matches with the desired time
+    print(now)
+    if(now == '18:51:10'):  # check if matches with the desired time
         print("send daily message")
-        channel = bot.get_channel(953643248939860048) # mettez l'ID de votre channel discord
-        bot.loop.create_task(channel.send(
-            "**Sutom du jour disponible ! Bonne chance !**\n\n" +
-            "https://sutom.nocle.fr"
-        ))
+        for server in bot.guilds:
+            db = mongodb[str(server.id)].options
+            options = db.find_one({ "discord_id": server.id })
+            if options is not None:
+                channel = bot.get_channel(options['daily_channel']) # mettez l'ID de votre channel discord
+                bot.loop.create_task(channel.send(
+                    "**Sutom du jour disponible ! Bonne chance !**\n\n" +
+                    "https://sutom.nocle.fr"
+                ))
+        
 
 
 
