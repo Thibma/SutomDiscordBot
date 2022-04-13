@@ -20,12 +20,12 @@ createDate = datetime.datetime(2022, 1, 7)
 timezone = pytz.timezone("Europe/Paris")
 print(datetime.datetime.now(tz = timezone))
 
-bot = commands.Bot(command_prefix = '$')
+bot = commands.Bot(command_prefix = '$', help_command=None)
 
 @bot.event
 async def on_ready():
     print("Bot ready")
-    await bot.change_presence(activity = Game(name = "Sutom - $aide"))
+    await bot.change_presence(activity = Game(name = "Sutom - $help"))
     checkTime()
 
 @bot.event
@@ -167,7 +167,7 @@ async def top(ctx):
     await ctx.send(embed = embed)
 
 @bot.command()
-async def aide(ctx):
+async def help(ctx):
     await ctx.send(
         "Bienvenue sur le **Bot Sutom**. \n" +
         "Copiez / Collez votre résultat Sutom dans ce channel pour enregistrer votre score. \n" +
@@ -175,7 +175,7 @@ async def aide(ctx):
         "Commandes disponibles :\n" +
         "**$score** - Affiche votre score global\n" +
         "**$top** - Affiche le top score du serveur\n" +
-        "**$aide** - Affiche cette aide LUL\n\n" +
+        "**$help** - Affiche cette aide LUL\n\n" +
         "Bot développé par **Thibma**"
     )
 

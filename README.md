@@ -67,5 +67,5 @@ Allez dans 'Deploy' ensuite et suivez les insctructions pour uploadez le Bot sur
 ## Commandes
 * `$score` : Affiche le score du joueur
 * `$top`: Affiche le Top 10 du serveur
-* `$aide` : Affiche l'aide du bot
+* `$help` : Affiche l'aide du bot
 
