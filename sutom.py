@@ -209,7 +209,7 @@ def checkTime():
     threading.Timer(1, checkTime).start()
     now = pytz.utc.localize(datetime.datetime.now()).astimezone(timezone).strftime("%H:%M:%S")
     print(now)
-    if(now == '18:51:10'):  # check if matches with the desired time
+    if(now == '00:00:00'):  # check if matches with the desired time
         print("send daily message")
         for server in bot.guilds:
             db = mongodb[str(server.id)].options
