@@ -11,6 +11,8 @@ import threading
 import pytz
 import os
 
+from process import *
+
 load_dotenv()
 
 mongodb = pymongo.MongoClient(os.getenv("MONGO_URL"), tz_aware = True)
@@ -177,67 +179,19 @@ async def aide(ctx):
         "Bot développé par **Thibma**"
     )
 
+# Disponible uniquement sur mon serveur pour le moment (en cours pour tous les serveurs)
 def checkTime():
     threading.Timer(1, checkTime).start()
     now = pytz.utc.localize(datetime.datetime.now()).astimezone(timezone).strftime("%H:%M:%S")
 
     if(now == '00:00:00'):  # check if matches with the desired time
         print("send daily message")
-        channel = bot.get_channel(953643248939860048)
+        channel = bot.get_channel(953643248939860048) # mettez l'ID de votre channel discord
         bot.loop.create_task(channel.send(
             "**Sutom du jour disponible ! Bonne chance !**\n\n" +
             "https://sutom.nocle.fr"
         ))
 
-def decodeSutom(message):
-    i = 0
-    for c in message:
-        if c == "🟥":
-            break
-        i += 1
-    decodedMessage = message[i:]
 
-    i = 0
-    for c in decodedMessage:
-        #if c != "🟥" and c != "🟦" and c != "🟡" and c != "\n":
-        #    break
-        if c == "\n" and decodedMessage[i + 1] == "\n":
-            break
-        i += 1
-    sutomCode = decodedMessage[:i]
-    return sutomCode
-
-def verifySutom(sutomCode):
-    for c in sutomCode:
-        if c != "🟥" and c != "🟦" and c != "🟡" and c != "\n":
-            return False
-
-    lines = sutomCode.splitlines()
-    try:
-        numberLetter = len(lines[0])
-    except IndexError:
-        return False
-    numberOfLines = len(lines)
-    if numberOfLines > 6:
-        return False
-    actualLine = 0
-    for line in sutomCode.splitlines():
-        actualLine += 1
-        nextNumberLetter = len(line)
-        if numberLetter != nextNumberLetter:
-            return False
-        if "🟦" not in line and "🟡" not in line:
-            if actualLine != numberOfLines:
-                return False
-
-    return True
-
-def scoreSutom(sutomCode):
-    score = 6
-    for line in sutomCode.splitlines():
-        if "🟦" not in line and "🟡" not in line:
-            return score
-        score -= 1
-    return 0
 
 bot.run(os.getenv("TOKEN_BOT"))
