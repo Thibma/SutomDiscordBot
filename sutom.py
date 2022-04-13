@@ -199,7 +199,7 @@ async def help(ctx):
         "Commandes disponibles :\n" +
         "**$score** - Affiche votre score global\n" +
         "**$top** - Affiche le top score du serveur\n" +
-        "**$daily** - (ADMIN ONLY) Affiche le message quotidien de disponibilité du Sutom du jour sur ce channel" +
+        "**$daily** - (ADMIN ONLY) Affiche le message quotidien de disponibilité du Sutom du jour sur ce channel\n" +
         "**$help** - Affiche cette aide LUL\n\n" +
         "Bot développé par **Thibma**"
     )
