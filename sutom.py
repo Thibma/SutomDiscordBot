@@ -96,7 +96,7 @@ async def on_message(message: Message):
         switcher = {
             6: "Incroyable ! Du premier coup ! **+6 points**",
             5: "Génial ! Tu as trouvé en 2 essais ! **+5 points**",
-            4: "Bien joué ! Tu as trouvé le mots en 3 coups ! **+4 points**",
+            4: "Bien joué ! Tu as trouvé le mot en 3 coups ! **+4 points**",
             3: "GG Tu as trouvé le mot ! **+3 points**",
             2: "Pas mal, essaye de faire mieux demain ! **+2 points**",
             1: "Wouah ! Tu as trouvé au dernier essai ! **+1 point**",

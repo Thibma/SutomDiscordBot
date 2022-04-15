@@ -1,6 +1,8 @@
 # Bot SUTOM pour Discord
 Bot permettant de jouer entre amis ou communauté sur Discord au jeu SUTOM disponible à l'adresse : https://sutom.nocle.fr/ 
 
+[Cliquez ici pour ajouter le Bot à votre serveur Discord](https://discord.com/api/oauth2/authorize?client_id=953942427692044329&permissions=412317379648&scope=bot)
+
 ## Crédits
 SUTOM crée par [@Jonamaths](https://twitter.com/Jonamaths) inspiré par le jeu Wordle. (Sans lui pas de jeu !)
 
@@ -11,6 +13,12 @@ Bot crée par [@Thibma](https://twitter.com/Thibma_).
 * Top 10 du serveur discord
 * Score de l'utilisateur
 * Mises à jours futures
+
+## Commandes
+* `$score` : Affiche le score du joueur
+* `$top`: Affiche le Top 10 du serveur
+* `$daily`: (ADMIN ONLY) Affiche le message quotidien de disponibilité du Sutom du jour sur ce channel
+* `$help` : Affiche l'aide du bot
 
 ## Installation
 
@@ -63,10 +71,4 @@ TOKEN_BOT : Token du bot Discord
 ```
 
 Allez dans 'Deploy' ensuite et suivez les insctructions pour uploadez le Bot sur Heroku.
-
-## Commandes
-* `$score` : Affiche le score du joueur
-* `$top`: Affiche le Top 10 du serveur
-* `$daily`: (ADMIN ONLY) Affiche le message quotidien de disponibilité du Sutom du jour sur ce channel
-* `$help` : Affiche l'aide du bot
 
